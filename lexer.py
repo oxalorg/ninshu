@@ -1,4 +1,5 @@
 import ply.lex as lex
+import unittest
 
 
 class NinLexer():
@@ -12,8 +13,8 @@ class NinLexer():
     }
 
     tokens = [
-        'NUMBER', 'PLUS', 'MINUS', 'MULT', 'DIV', 'EQ', 'LPAREN',
-        'RPAREN', 'ID'
+        'NUMBER', 'PLUS', 'MINUS', 'MULT', 'DIV', 'EQ', 'LPAREN', 'RPAREN',
+        'ID'
     ] + list(reserved.values())
 
     # Tokens
@@ -53,10 +54,32 @@ class NinLexer():
 
     def test(self, data):
         self.lexer.input(data)
-        for tok in self.lexer:
-            print(tok)
+
+    def test_next_tok(self):
+        t = self.lexer.token()
+        return {'type': t.type, 'value': t.value}
 
 
-testLex = NinLexer()
-testLex.build()
-testLex.test('2 + 3')
+# Unit tests
+class LexTest(unittest.TestCase):
+    def setUp(self):
+        self.lexer = NinLexer()
+        self.lexer.build()
+
+    def test_simple(self):
+        self.lexer.test('2 + 3')
+        t = self.lexer.test_next_tok()
+        self.assertTrue('NUMBER', t['type'])
+        self.assertTrue(2, t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertTrue('PLUS', t['type'])
+        self.assertTrue('+', t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertTrue('NUMBER', t['type'])
+        self.assertTrue(3, t['value'])
+
+
+if __name__ == '__main__':
+    unittest.main()
