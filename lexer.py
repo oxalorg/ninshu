@@ -31,7 +31,7 @@ class NinLexer():
 
     def t_ID(self, t):
         r'[a-zA-Z_][a-zA-Z0-9_]*'
-        t.type = reserved.get(t.value, 'ID')
+        t.type = self.reserved.get(t.value, 'ID')
         # Look up symbol table information and return a tuple
         # t.value = (t.value, symbol_lookup(t.value))
         return t
@@ -68,17 +68,33 @@ class LexTest(unittest.TestCase):
 
     def test_simple(self):
         self.lexer.test('2 + 3')
-        t = self.lexer.test_next_tok()
-        self.assertTrue('NUMBER', t['type'])
-        self.assertTrue(2, t['value'])
 
         t = self.lexer.test_next_tok()
-        self.assertTrue('PLUS', t['type'])
-        self.assertTrue('+', t['value'])
+        self.assertEqual('NUMBER', t['type'])
+        self.assertEqual(2, t['value'])
 
         t = self.lexer.test_next_tok()
-        self.assertTrue('NUMBER', t['type'])
-        self.assertTrue(3, t['value'])
+        self.assertEqual('PLUS', t['type'])
+        self.assertEqual('+', t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('NUMBER', t['type'])
+        self.assertEqual(3, t['value'])
+
+    def test_medium(self):
+        self.lexer.test('* Trolololol /')
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('MULT', t['type'])
+        self.assertEqual('*', t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('ID', t['type'])
+        self.assertEqual('Trolololol', t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('DIV', t['type'])
+        self.assertEqual('/', t['value'])
 
 
 if __name__ == '__main__':
