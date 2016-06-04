@@ -5,23 +5,24 @@ class ASTNode():
     pass
 
 
-class Showdown(ASTNode):
+class ListNode(ASTNode):
     def __init__(self, children=[]):
         self.childen = children
-
-
-class Combo(ASTNode):
-    def __init__(self, children=[]):
-        self.children = children
-        # self.parent = parent
 
     def append(self, item):
         self.children.append(item)
 
 
-class JutsuSeal(ASTNode):
-    def __init__(self, children=[]):
-        self.children = children
+class Showdown(ListNode):
+    pass
+
+
+class Combo(ListNode):
+    pass
+
+
+class JutsuSeal(ListNode):
+    pass
 
 
 class YinYang(ASTNode):
