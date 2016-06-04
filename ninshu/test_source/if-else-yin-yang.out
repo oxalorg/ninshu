@@ -1,0 +1,8 @@
+DEBUG:__main__:hand_sign: a
+DEBUG:__main__:hand_sign: -1
+DEBUG:__main__:hand_sign: -99
+DEBUG:__main__:YinYang: -99
+DEBUG:__main__:hand_sign: 99
+DEBUG:__main__:YinYang: -99
+DEBUG:__main__:chakra: ['a', -99]
+{'a': 2}

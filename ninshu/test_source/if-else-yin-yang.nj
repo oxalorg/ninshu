@@ -1,0 +1,12 @@
+jutsu {
+    a = 2;
+    yin a < 3 {
+        yin a > 3{
+            -1;
+        } yang {
+            -99;
+        }
+    } yang {
+        99;
+    }
+} seal
