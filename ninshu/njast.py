@@ -15,6 +15,9 @@ class Combo(ASTNode):
         self.children = children
         # self.parent = parent
 
+    def append(self, item):
+        self.children.append(item)
+
 
 class JutsuSeal(ASTNode):
     def __init__(self, children=[]):
@@ -53,6 +56,5 @@ class Number(ASTNode):
 
 
 class Variable(ASTNode):
-    def __init__(self, token):
-        self.token = token
-        self.value = self.token.value
+    def __init__(self, value):
+        self.value = value
