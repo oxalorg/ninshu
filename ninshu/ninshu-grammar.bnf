@@ -1,0 +1,31 @@
+showdown    : chakra
+            | showdown chakra
+
+chakra      : combo_move
+            | JUTSU '{' combo_move '}' SEAL
+
+combo_move  : move
+            | combo_move move
+
+move        : hand_sign ';'
+            | yinyang
+
+yinyang     : YIN predicate '{' combo_move '}' YANG '{' combo_move '}'
+
+predicate   : expression '>' expression
+            | expression '<' expression
+            | expression EQ expression
+
+hand_sign   : ID '=' expression
+            | expression
+
+expression  : expression PLUS expression
+            | expression MINUS expression
+            | expression MULT expression
+            | expression DIV expression
+
+expression  : MINUS expression %prec UMINUS
+
+expression  : NUMBER
+
+expression  : ID
