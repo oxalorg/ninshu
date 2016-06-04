@@ -4,13 +4,15 @@ import unittest
 
 class NinLexer():
     reserved = {
-        'justu': 'JUTSU',
+        'jutsu': 'JUTSU',
         'seal': 'SEAL',
         'shurikens': 'SHURIKENS',
         'throw': 'THROW',
         'miss': 'MISS',
         'refill': 'REFILL'
     }
+
+    literals = ['{', '}', ';']
 
     tokens = [
         'NUMBER', 'PLUS', 'MINUS', 'MULT', 'DIV', 'EQ', 'LPAREN', 'RPAREN',
@@ -95,6 +97,25 @@ class LexTest(unittest.TestCase):
         t = self.lexer.test_next_tok()
         self.assertEqual('DIV', t['type'])
         self.assertEqual('/', t['value'])
+
+    def test_advanced(self):
+        self.lexer.test('jutsu { } seal')
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('JUTSU', t['type'])
+        self.assertEqual('jutsu', t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('{', t['type'])
+        self.assertEqual('{', t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('}', t['type'])
+        self.assertEqual('}', t['value'])
+
+        t = self.lexer.test_next_tok()
+        self.assertEqual('SEAL', t['type'])
+        self.assertEqual('seal', t['value'])
 
 
 if __name__ == '__main__':
