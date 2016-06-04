@@ -4,6 +4,7 @@ import sys
 import os
 import logging
 from njast import *
+from njvisitor import *
 
 
 class NinParser():
@@ -34,6 +35,7 @@ class NinParser():
         else:
             p[1].append(p[2])
             p[0] = p[1]
+        Visitor(p[0])
 
     def p_chakra(self, p):
         """
@@ -43,7 +45,7 @@ class NinParser():
         if len(p) == 2:
             p[0] = p[1]
         else:
-            p[0] = JutsuSeal(p[3])
+            p[0] = JutsuSeal([p[3]])
         self.logger.debug("chakra: {}".format(p[0]))
 
     def p_combo_move(self, p):

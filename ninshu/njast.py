@@ -7,7 +7,7 @@ class ASTNode():
 
 class ListNode(ASTNode):
     def __init__(self, children=[]):
-        self.childen = children
+        self.children = children
 
     def append(self, item):
         self.children.append(item)
