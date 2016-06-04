@@ -2,365 +2,934 @@ Created by PLY version 3.8 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    SEAL
-    THROW
+    SHURIKENS
+    REFILL
     MISS
     RPAREN
-    SHURIKENS
-    JUTSU
     LPAREN
-    REFILL
+    THROW
 
 Grammar
 
-Rule 0     S' -> combo_move
-Rule 1     combo_move -> move
-Rule 2     move -> hand_sign
-Rule 3     hand_sign -> ID EQ expression
-Rule 4     hand_sign -> expression
-Rule 5     expression -> expression PLUS expression
-Rule 6     expression -> expression MINUS expression
-Rule 7     expression -> expression MULT expression
-Rule 8     expression -> expression DIV expression
-Rule 9     expression -> MINUS expression
-Rule 10    expression -> NUMBER
-Rule 11    expression -> ID
+Rule 0     S' -> showdown
+Rule 1     showdown -> chakra
+Rule 2     showdown -> showdown chakra
+Rule 3     chakra -> combo_move
+Rule 4     chakra -> JUTSU { combo_move } SEAL
+Rule 5     combo_move -> move
+Rule 6     combo_move -> combo_move move
+Rule 7     move -> hand_sign ;
+Rule 8     move -> yinyang
+Rule 9     yinyang -> YIN predicate { combo_move } YANG { combo_move }
+Rule 10    predicate -> expression > expression
+Rule 11    predicate -> expression < expression
+Rule 12    predicate -> expression EQ expression
+Rule 13    hand_sign -> ID = expression
+Rule 14    hand_sign -> expression
+Rule 15    expression -> expression PLUS expression
+Rule 16    expression -> expression MINUS expression
+Rule 17    expression -> expression MULT expression
+Rule 18    expression -> expression DIV expression
+Rule 19    expression -> MINUS expression
+Rule 20    expression -> NUMBER
+Rule 21    expression -> ID
 
 Terminals, with rules where they appear
 
-DIV                  : 8
-EQ                   : 3
-ID                   : 3 11
-JUTSU                : 
+;                    : 7
+<                    : 11
+=                    : 13
+>                    : 10
+DIV                  : 18
+EQ                   : 12
+ID                   : 13 21
+JUTSU                : 4
 LPAREN               : 
-MINUS                : 6 9
+MINUS                : 16 19
 MISS                 : 
-MULT                 : 7
-NUMBER               : 10
-PLUS                 : 5
+MULT                 : 17
+NUMBER               : 20
+PLUS                 : 15
 REFILL               : 
 RPAREN               : 
-SEAL                 : 
+SEAL                 : 4
 SHURIKENS            : 
 THROW                : 
+YANG                 : 9
+YIN                  : 9
 error                : 
+{                    : 4 9 9
+}                    : 4 9 9
 
 Nonterminals, with rules where they appear
 
-combo_move           : 0
-expression           : 3 4 5 5 6 6 7 7 8 8 9
-hand_sign            : 2
-move                 : 1
+chakra               : 1 2
+combo_move           : 3 4 6 9 9
+expression           : 10 10 11 11 12 12 13 14 15 15 16 16 17 17 18 18 19
+hand_sign            : 7
+move                 : 5 6
+predicate            : 9
+showdown             : 2 0
+yinyang              : 8
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . combo_move
-    (1) combo_move -> . move
-    (2) move -> . hand_sign
-    (3) hand_sign -> . ID EQ expression
-    (4) hand_sign -> . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression MULT expression
-    (8) expression -> . expression DIV expression
-    (9) expression -> . MINUS expression
-    (10) expression -> . NUMBER
-    (11) expression -> . ID
+    (0) S' -> . showdown
+    (1) showdown -> . chakra
+    (2) showdown -> . showdown chakra
+    (3) chakra -> . combo_move
+    (4) chakra -> . JUTSU { combo_move } SEAL
+    (5) combo_move -> . move
+    (6) combo_move -> . combo_move move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    ID              shift and go to state 2
-    MINUS           shift and go to state 7
-    NUMBER          shift and go to state 4
+    JUTSU           shift and go to state 12
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
 
-    move                           shift and go to state 1
-    combo_move                     shift and go to state 3
-    hand_sign                      shift and go to state 6
+    chakra                         shift and go to state 4
+    yinyang                        shift and go to state 11
+    showdown                       shift and go to state 2
     expression                     shift and go to state 5
+    combo_move                     shift and go to state 6
+    hand_sign                      shift and go to state 9
+    move                           shift and go to state 7
 
 state 1
 
-    (1) combo_move -> move .
+    (9) yinyang -> YIN . predicate { combo_move } YANG { combo_move }
+    (10) predicate -> . expression > expression
+    (11) predicate -> . expression < expression
+    (12) predicate -> . expression EQ expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    $end            reduce using rule 1 (combo_move -> move .)
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
 
+    predicate                      shift and go to state 13
+    expression                     shift and go to state 15
 
 state 2
 
-    (3) hand_sign -> ID . EQ expression
-    (11) expression -> ID .
+    (0) S' -> showdown .
+    (2) showdown -> showdown . chakra
+    (3) chakra -> . combo_move
+    (4) chakra -> . JUTSU { combo_move } SEAL
+    (5) combo_move -> . move
+    (6) combo_move -> . combo_move move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    EQ              shift and go to state 8
-    PLUS            reduce using rule 11 (expression -> ID .)
-    MINUS           reduce using rule 11 (expression -> ID .)
-    MULT            reduce using rule 11 (expression -> ID .)
-    DIV             reduce using rule 11 (expression -> ID .)
-    $end            reduce using rule 11 (expression -> ID .)
+    JUTSU           shift and go to state 12
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
 
+    chakra                         shift and go to state 16
+    yinyang                        shift and go to state 11
+    expression                     shift and go to state 5
+    combo_move                     shift and go to state 6
+    hand_sign                      shift and go to state 9
+    move                           shift and go to state 7
 
 state 3
 
-    (0) S' -> combo_move .
+    (20) expression -> NUMBER .
 
+    PLUS            reduce using rule 20 (expression -> NUMBER .)
+    MINUS           reduce using rule 20 (expression -> NUMBER .)
+    MULT            reduce using rule 20 (expression -> NUMBER .)
+    DIV             reduce using rule 20 (expression -> NUMBER .)
+    ;               reduce using rule 20 (expression -> NUMBER .)
+    {               reduce using rule 20 (expression -> NUMBER .)
+    >               reduce using rule 20 (expression -> NUMBER .)
+    <               reduce using rule 20 (expression -> NUMBER .)
+    EQ              reduce using rule 20 (expression -> NUMBER .)
 
 
 state 4
 
-    (10) expression -> NUMBER .
+    (1) showdown -> chakra .
 
-    PLUS            reduce using rule 10 (expression -> NUMBER .)
-    MINUS           reduce using rule 10 (expression -> NUMBER .)
-    MULT            reduce using rule 10 (expression -> NUMBER .)
-    DIV             reduce using rule 10 (expression -> NUMBER .)
-    $end            reduce using rule 10 (expression -> NUMBER .)
+    JUTSU           reduce using rule 1 (showdown -> chakra .)
+    ID              reduce using rule 1 (showdown -> chakra .)
+    YIN             reduce using rule 1 (showdown -> chakra .)
+    MINUS           reduce using rule 1 (showdown -> chakra .)
+    NUMBER          reduce using rule 1 (showdown -> chakra .)
+    $end            reduce using rule 1 (showdown -> chakra .)
 
 
 state 5
 
-    (4) hand_sign -> expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . MULT expression
-    (8) expression -> expression . DIV expression
+    (14) hand_sign -> expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
 
-    $end            reduce using rule 4 (hand_sign -> expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    MULT            shift and go to state 10
-    DIV             shift and go to state 9
+    ;               reduce using rule 14 (hand_sign -> expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 18
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
 
 
 state 6
 
-    (2) move -> hand_sign .
+    (3) chakra -> combo_move .
+    (6) combo_move -> combo_move . move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    $end            reduce using rule 2 (move -> hand_sign .)
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for YIN resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for NUMBER resolved as shift
+    JUTSU           reduce using rule 3 (chakra -> combo_move .)
+    $end            reduce using rule 3 (chakra -> combo_move .)
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
 
+  ! ID              [ reduce using rule 3 (chakra -> combo_move .) ]
+  ! YIN             [ reduce using rule 3 (chakra -> combo_move .) ]
+  ! MINUS           [ reduce using rule 3 (chakra -> combo_move .) ]
+  ! NUMBER          [ reduce using rule 3 (chakra -> combo_move .) ]
+
+    yinyang                        shift and go to state 11
+    expression                     shift and go to state 5
+    hand_sign                      shift and go to state 9
+    move                           shift and go to state 21
 
 state 7
 
-    (9) expression -> MINUS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression MULT expression
-    (8) expression -> . expression DIV expression
-    (9) expression -> . MINUS expression
-    (10) expression -> . NUMBER
-    (11) expression -> . ID
+    (5) combo_move -> move .
 
-    MINUS           shift and go to state 7
-    NUMBER          shift and go to state 4
-    ID              shift and go to state 13
+    ID              reduce using rule 5 (combo_move -> move .)
+    YIN             reduce using rule 5 (combo_move -> move .)
+    MINUS           reduce using rule 5 (combo_move -> move .)
+    NUMBER          reduce using rule 5 (combo_move -> move .)
+    JUTSU           reduce using rule 5 (combo_move -> move .)
+    $end            reduce using rule 5 (combo_move -> move .)
+    }               reduce using rule 5 (combo_move -> move .)
 
-    expression                     shift and go to state 14
 
 state 8
 
-    (3) hand_sign -> ID EQ . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression MULT expression
-    (8) expression -> . expression DIV expression
-    (9) expression -> . MINUS expression
-    (10) expression -> . NUMBER
-    (11) expression -> . ID
+    (19) expression -> MINUS . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    MINUS           shift and go to state 7
-    NUMBER          shift and go to state 4
-    ID              shift and go to state 13
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
 
-    expression                     shift and go to state 15
+    expression                     shift and go to state 22
 
 state 9
 
-    (8) expression -> expression DIV . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression MULT expression
-    (8) expression -> . expression DIV expression
-    (9) expression -> . MINUS expression
-    (10) expression -> . NUMBER
-    (11) expression -> . ID
+    (7) move -> hand_sign . ;
 
-    MINUS           shift and go to state 7
-    NUMBER          shift and go to state 4
-    ID              shift and go to state 13
+    ;               shift and go to state 23
 
-    expression                     shift and go to state 16
 
 state 10
 
-    (7) expression -> expression MULT . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression MULT expression
-    (8) expression -> . expression DIV expression
-    (9) expression -> . MINUS expression
-    (10) expression -> . NUMBER
-    (11) expression -> . ID
+    (13) hand_sign -> ID . = expression
+    (21) expression -> ID .
 
-    MINUS           shift and go to state 7
-    NUMBER          shift and go to state 4
-    ID              shift and go to state 13
+    =               shift and go to state 24
+    PLUS            reduce using rule 21 (expression -> ID .)
+    MINUS           reduce using rule 21 (expression -> ID .)
+    MULT            reduce using rule 21 (expression -> ID .)
+    DIV             reduce using rule 21 (expression -> ID .)
+    ;               reduce using rule 21 (expression -> ID .)
 
-    expression                     shift and go to state 17
 
 state 11
 
-    (5) expression -> expression PLUS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression MULT expression
-    (8) expression -> . expression DIV expression
-    (9) expression -> . MINUS expression
-    (10) expression -> . NUMBER
-    (11) expression -> . ID
+    (8) move -> yinyang .
 
-    MINUS           shift and go to state 7
-    NUMBER          shift and go to state 4
-    ID              shift and go to state 13
+    }               reduce using rule 8 (move -> yinyang .)
+    ID              reduce using rule 8 (move -> yinyang .)
+    YIN             reduce using rule 8 (move -> yinyang .)
+    MINUS           reduce using rule 8 (move -> yinyang .)
+    NUMBER          reduce using rule 8 (move -> yinyang .)
+    JUTSU           reduce using rule 8 (move -> yinyang .)
+    $end            reduce using rule 8 (move -> yinyang .)
 
-    expression                     shift and go to state 18
 
 state 12
 
-    (6) expression -> expression MINUS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression MULT expression
-    (8) expression -> . expression DIV expression
-    (9) expression -> . MINUS expression
-    (10) expression -> . NUMBER
-    (11) expression -> . ID
+    (4) chakra -> JUTSU . { combo_move } SEAL
 
-    MINUS           shift and go to state 7
-    NUMBER          shift and go to state 4
-    ID              shift and go to state 13
+    {               shift and go to state 25
 
-    expression                     shift and go to state 19
 
 state 13
 
-    (11) expression -> ID .
+    (9) yinyang -> YIN predicate . { combo_move } YANG { combo_move }
 
-    PLUS            reduce using rule 11 (expression -> ID .)
-    MINUS           reduce using rule 11 (expression -> ID .)
-    MULT            reduce using rule 11 (expression -> ID .)
-    DIV             reduce using rule 11 (expression -> ID .)
-    $end            reduce using rule 11 (expression -> ID .)
+    {               shift and go to state 26
 
 
 state 14
 
-    (9) expression -> MINUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . MULT expression
-    (8) expression -> expression . DIV expression
+    (21) expression -> ID .
 
-    PLUS            reduce using rule 9 (expression -> MINUS expression .)
-    MINUS           reduce using rule 9 (expression -> MINUS expression .)
-    MULT            reduce using rule 9 (expression -> MINUS expression .)
-    DIV             reduce using rule 9 (expression -> MINUS expression .)
-    $end            reduce using rule 9 (expression -> MINUS expression .)
-
-  ! PLUS            [ shift and go to state 11 ]
-  ! MINUS           [ shift and go to state 12 ]
-  ! MULT            [ shift and go to state 10 ]
-  ! DIV             [ shift and go to state 9 ]
+    PLUS            reduce using rule 21 (expression -> ID .)
+    MINUS           reduce using rule 21 (expression -> ID .)
+    MULT            reduce using rule 21 (expression -> ID .)
+    DIV             reduce using rule 21 (expression -> ID .)
+    {               reduce using rule 21 (expression -> ID .)
+    ;               reduce using rule 21 (expression -> ID .)
+    >               reduce using rule 21 (expression -> ID .)
+    <               reduce using rule 21 (expression -> ID .)
+    EQ              reduce using rule 21 (expression -> ID .)
 
 
 state 15
 
-    (3) hand_sign -> ID EQ expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . MULT expression
-    (8) expression -> expression . DIV expression
+    (10) predicate -> expression . > expression
+    (11) predicate -> expression . < expression
+    (12) predicate -> expression . EQ expression
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
 
-    $end            reduce using rule 3 (hand_sign -> ID EQ expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    MULT            shift and go to state 10
-    DIV             shift and go to state 9
+    >               shift and go to state 28
+    <               shift and go to state 27
+    EQ              shift and go to state 29
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 18
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
 
 
 state 16
 
-    (8) expression -> expression DIV expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . MULT expression
-    (8) expression -> expression . DIV expression
+    (2) showdown -> showdown chakra .
 
-    PLUS            reduce using rule 8 (expression -> expression DIV expression .)
-    MINUS           reduce using rule 8 (expression -> expression DIV expression .)
-    MULT            reduce using rule 8 (expression -> expression DIV expression .)
-    DIV             reduce using rule 8 (expression -> expression DIV expression .)
-    $end            reduce using rule 8 (expression -> expression DIV expression .)
-
-  ! PLUS            [ shift and go to state 11 ]
-  ! MINUS           [ shift and go to state 12 ]
-  ! MULT            [ shift and go to state 10 ]
-  ! DIV             [ shift and go to state 9 ]
+    JUTSU           reduce using rule 2 (showdown -> showdown chakra .)
+    ID              reduce using rule 2 (showdown -> showdown chakra .)
+    YIN             reduce using rule 2 (showdown -> showdown chakra .)
+    MINUS           reduce using rule 2 (showdown -> showdown chakra .)
+    NUMBER          reduce using rule 2 (showdown -> showdown chakra .)
+    $end            reduce using rule 2 (showdown -> showdown chakra .)
 
 
 state 17
 
-    (7) expression -> expression MULT expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . MULT expression
-    (8) expression -> expression . DIV expression
+    (17) expression -> expression MULT . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    PLUS            reduce using rule 7 (expression -> expression MULT expression .)
-    MINUS           reduce using rule 7 (expression -> expression MULT expression .)
-    MULT            reduce using rule 7 (expression -> expression MULT expression .)
-    DIV             reduce using rule 7 (expression -> expression MULT expression .)
-    $end            reduce using rule 7 (expression -> expression MULT expression .)
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
 
-  ! PLUS            [ shift and go to state 11 ]
-  ! MINUS           [ shift and go to state 12 ]
-  ! MULT            [ shift and go to state 10 ]
-  ! DIV             [ shift and go to state 9 ]
-
+    expression                     shift and go to state 30
 
 state 18
 
-    (5) expression -> expression PLUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . MULT expression
-    (8) expression -> expression . DIV expression
+    (16) expression -> expression MINUS . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    PLUS            reduce using rule 5 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 5 (expression -> expression PLUS expression .)
-    $end            reduce using rule 5 (expression -> expression PLUS expression .)
-    MULT            shift and go to state 10
-    DIV             shift and go to state 9
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
 
-  ! MULT            [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! DIV             [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 11 ]
-  ! MINUS           [ shift and go to state 12 ]
-
+    expression                     shift and go to state 31
 
 state 19
 
-    (6) expression -> expression MINUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . MULT expression
-    (8) expression -> expression . DIV expression
+    (18) expression -> expression DIV . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
 
-    PLUS            reduce using rule 6 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 6 (expression -> expression MINUS expression .)
-    $end            reduce using rule 6 (expression -> expression MINUS expression .)
-    MULT            shift and go to state 10
-    DIV             shift and go to state 9
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
 
-  ! MULT            [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! DIV             [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! PLUS            [ shift and go to state 11 ]
-  ! MINUS           [ shift and go to state 12 ]
+    expression                     shift and go to state 32
 
+state 20
+
+    (15) expression -> expression PLUS . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 33
+
+state 21
+
+    (6) combo_move -> combo_move move .
+
+    ID              reduce using rule 6 (combo_move -> combo_move move .)
+    YIN             reduce using rule 6 (combo_move -> combo_move move .)
+    MINUS           reduce using rule 6 (combo_move -> combo_move move .)
+    NUMBER          reduce using rule 6 (combo_move -> combo_move move .)
+    JUTSU           reduce using rule 6 (combo_move -> combo_move move .)
+    $end            reduce using rule 6 (combo_move -> combo_move move .)
+    }               reduce using rule 6 (combo_move -> combo_move move .)
+
+
+state 22
+
+    (19) expression -> MINUS expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    PLUS            reduce using rule 19 (expression -> MINUS expression .)
+    MINUS           reduce using rule 19 (expression -> MINUS expression .)
+    MULT            reduce using rule 19 (expression -> MINUS expression .)
+    DIV             reduce using rule 19 (expression -> MINUS expression .)
+    ;               reduce using rule 19 (expression -> MINUS expression .)
+    {               reduce using rule 19 (expression -> MINUS expression .)
+    >               reduce using rule 19 (expression -> MINUS expression .)
+    <               reduce using rule 19 (expression -> MINUS expression .)
+    EQ              reduce using rule 19 (expression -> MINUS expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! MULT            [ shift and go to state 17 ]
+  ! DIV             [ shift and go to state 19 ]
+
+
+state 23
+
+    (7) move -> hand_sign ; .
+
+    }               reduce using rule 7 (move -> hand_sign ; .)
+    ID              reduce using rule 7 (move -> hand_sign ; .)
+    YIN             reduce using rule 7 (move -> hand_sign ; .)
+    MINUS           reduce using rule 7 (move -> hand_sign ; .)
+    NUMBER          reduce using rule 7 (move -> hand_sign ; .)
+    JUTSU           reduce using rule 7 (move -> hand_sign ; .)
+    $end            reduce using rule 7 (move -> hand_sign ; .)
+
+
+state 24
+
+    (13) hand_sign -> ID = . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 34
+
+state 25
+
+    (4) chakra -> JUTSU { . combo_move } SEAL
+    (5) combo_move -> . move
+    (6) combo_move -> . combo_move move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+
+    yinyang                        shift and go to state 11
+    combo_move                     shift and go to state 35
+    expression                     shift and go to state 5
+    hand_sign                      shift and go to state 9
+    move                           shift and go to state 7
+
+state 26
+
+    (9) yinyang -> YIN predicate { . combo_move } YANG { combo_move }
+    (5) combo_move -> . move
+    (6) combo_move -> . combo_move move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+
+    yinyang                        shift and go to state 11
+    combo_move                     shift and go to state 36
+    move                           shift and go to state 7
+    hand_sign                      shift and go to state 9
+    expression                     shift and go to state 5
+
+state 27
+
+    (11) predicate -> expression < . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 37
+
+state 28
+
+    (10) predicate -> expression > . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 38
+
+state 29
+
+    (12) predicate -> expression EQ . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 39
+
+state 30
+
+    (17) expression -> expression MULT expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    PLUS            reduce using rule 17 (expression -> expression MULT expression .)
+    MINUS           reduce using rule 17 (expression -> expression MULT expression .)
+    MULT            reduce using rule 17 (expression -> expression MULT expression .)
+    DIV             reduce using rule 17 (expression -> expression MULT expression .)
+    ;               reduce using rule 17 (expression -> expression MULT expression .)
+    {               reduce using rule 17 (expression -> expression MULT expression .)
+    >               reduce using rule 17 (expression -> expression MULT expression .)
+    <               reduce using rule 17 (expression -> expression MULT expression .)
+    EQ              reduce using rule 17 (expression -> expression MULT expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! MULT            [ shift and go to state 17 ]
+  ! DIV             [ shift and go to state 19 ]
+
+
+state 31
+
+    (16) expression -> expression MINUS expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    PLUS            reduce using rule 16 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 16 (expression -> expression MINUS expression .)
+    ;               reduce using rule 16 (expression -> expression MINUS expression .)
+    {               reduce using rule 16 (expression -> expression MINUS expression .)
+    >               reduce using rule 16 (expression -> expression MINUS expression .)
+    <               reduce using rule 16 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 16 (expression -> expression MINUS expression .)
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
+
+  ! MULT            [ reduce using rule 16 (expression -> expression MINUS expression .) ]
+  ! DIV             [ reduce using rule 16 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 18 ]
+
+
+state 32
+
+    (18) expression -> expression DIV expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    PLUS            reduce using rule 18 (expression -> expression DIV expression .)
+    MINUS           reduce using rule 18 (expression -> expression DIV expression .)
+    MULT            reduce using rule 18 (expression -> expression DIV expression .)
+    DIV             reduce using rule 18 (expression -> expression DIV expression .)
+    ;               reduce using rule 18 (expression -> expression DIV expression .)
+    {               reduce using rule 18 (expression -> expression DIV expression .)
+    >               reduce using rule 18 (expression -> expression DIV expression .)
+    <               reduce using rule 18 (expression -> expression DIV expression .)
+    EQ              reduce using rule 18 (expression -> expression DIV expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! MULT            [ shift and go to state 17 ]
+  ! DIV             [ shift and go to state 19 ]
+
+
+state 33
+
+    (15) expression -> expression PLUS expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    PLUS            reduce using rule 15 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 15 (expression -> expression PLUS expression .)
+    ;               reduce using rule 15 (expression -> expression PLUS expression .)
+    {               reduce using rule 15 (expression -> expression PLUS expression .)
+    >               reduce using rule 15 (expression -> expression PLUS expression .)
+    <               reduce using rule 15 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 15 (expression -> expression PLUS expression .)
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
+
+  ! MULT            [ reduce using rule 15 (expression -> expression PLUS expression .) ]
+  ! DIV             [ reduce using rule 15 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 18 ]
+
+
+state 34
+
+    (13) hand_sign -> ID = expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    ;               reduce using rule 13 (hand_sign -> ID = expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 18
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
+
+
+state 35
+
+    (4) chakra -> JUTSU { combo_move . } SEAL
+    (6) combo_move -> combo_move . move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    }               shift and go to state 40
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+
+    yinyang                        shift and go to state 11
+    expression                     shift and go to state 5
+    hand_sign                      shift and go to state 9
+    move                           shift and go to state 21
+
+state 36
+
+    (9) yinyang -> YIN predicate { combo_move . } YANG { combo_move }
+    (6) combo_move -> combo_move . move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    }               shift and go to state 41
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+
+    yinyang                        shift and go to state 11
+    move                           shift and go to state 21
+    hand_sign                      shift and go to state 9
+    expression                     shift and go to state 5
+
+state 37
+
+    (11) predicate -> expression < expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    {               reduce using rule 11 (predicate -> expression < expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 18
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
+
+
+state 38
+
+    (10) predicate -> expression > expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    {               reduce using rule 10 (predicate -> expression > expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 18
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
+
+
+state 39
+
+    (12) predicate -> expression EQ expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . MULT expression
+    (18) expression -> expression . DIV expression
+
+    {               reduce using rule 12 (predicate -> expression EQ expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 18
+    MULT            shift and go to state 17
+    DIV             shift and go to state 19
+
+
+state 40
+
+    (4) chakra -> JUTSU { combo_move } . SEAL
+
+    SEAL            shift and go to state 42
+
+
+state 41
+
+    (9) yinyang -> YIN predicate { combo_move } . YANG { combo_move }
+
+    YANG            shift and go to state 43
+
+
+state 42
+
+    (4) chakra -> JUTSU { combo_move } SEAL .
+
+    JUTSU           reduce using rule 4 (chakra -> JUTSU { combo_move } SEAL .)
+    ID              reduce using rule 4 (chakra -> JUTSU { combo_move } SEAL .)
+    YIN             reduce using rule 4 (chakra -> JUTSU { combo_move } SEAL .)
+    MINUS           reduce using rule 4 (chakra -> JUTSU { combo_move } SEAL .)
+    NUMBER          reduce using rule 4 (chakra -> JUTSU { combo_move } SEAL .)
+    $end            reduce using rule 4 (chakra -> JUTSU { combo_move } SEAL .)
+
+
+state 43
+
+    (9) yinyang -> YIN predicate { combo_move } YANG . { combo_move }
+
+    {               shift and go to state 44
+
+
+state 44
+
+    (9) yinyang -> YIN predicate { combo_move } YANG { . combo_move }
+    (5) combo_move -> . move
+    (6) combo_move -> . combo_move move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+
+    yinyang                        shift and go to state 11
+    combo_move                     shift and go to state 45
+    move                           shift and go to state 7
+    hand_sign                      shift and go to state 9
+    expression                     shift and go to state 5
+
+state 45
+
+    (9) yinyang -> YIN predicate { combo_move } YANG { combo_move . }
+    (6) combo_move -> combo_move . move
+    (7) move -> . hand_sign ;
+    (8) move -> . yinyang
+    (13) hand_sign -> . ID = expression
+    (14) hand_sign -> . expression
+    (9) yinyang -> . YIN predicate { combo_move } YANG { combo_move }
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression MULT expression
+    (18) expression -> . expression DIV expression
+    (19) expression -> . MINUS expression
+    (20) expression -> . NUMBER
+    (21) expression -> . ID
+
+    }               shift and go to state 46
+    ID              shift and go to state 10
+    YIN             shift and go to state 1
+    MINUS           shift and go to state 8
+    NUMBER          shift and go to state 3
+
+    yinyang                        shift and go to state 11
+    move                           shift and go to state 21
+    hand_sign                      shift and go to state 9
+    expression                     shift and go to state 5
+
+state 46
+
+    (9) yinyang -> YIN predicate { combo_move } YANG { combo_move } .
+
+    ID              reduce using rule 9 (yinyang -> YIN predicate { combo_move } YANG { combo_move } .)
+    YIN             reduce using rule 9 (yinyang -> YIN predicate { combo_move } YANG { combo_move } .)
+    MINUS           reduce using rule 9 (yinyang -> YIN predicate { combo_move } YANG { combo_move } .)
+    NUMBER          reduce using rule 9 (yinyang -> YIN predicate { combo_move } YANG { combo_move } .)
+    JUTSU           reduce using rule 9 (yinyang -> YIN predicate { combo_move } YANG { combo_move } .)
+    $end            reduce using rule 9 (yinyang -> YIN predicate { combo_move } YANG { combo_move } .)
+    }               reduce using rule 9 (yinyang -> YIN predicate { combo_move } YANG { combo_move } .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 6 resolved as shift
+WARNING: shift/reduce conflict for YIN in state 6 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 6 resolved as shift
+WARNING: shift/reduce conflict for NUMBER in state 6 resolved as shift

@@ -9,10 +9,12 @@ class NinLexer():
         'shurikens': 'SHURIKENS',
         'throw': 'THROW',
         'miss': 'MISS',
-        'refill': 'REFILL'
+        'refill': 'REFILL',
+        'yin': 'YIN',
+        'yang': 'YANG',
     }
 
-    literals = ['{', '}', ';']
+    literals = ['{', '}', ';', '=', '>', '<']
 
     tokens = [
         'NUMBER', 'PLUS', 'MINUS', 'MULT', 'DIV', 'EQ', 'LPAREN', 'RPAREN',
@@ -24,7 +26,7 @@ class NinLexer():
     t_MINUS = r'-'
     t_MULT = r'\*'
     t_DIV = r'/'
-    t_EQ = r'='
+    t_EQ = r'=='
     t_LPAREN = r'\('
     t_RPAREN = r'\)'
     t_ignore = " \t"
