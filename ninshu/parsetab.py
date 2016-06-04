@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '8A196833E6BD620B5EC669B0815A1E75'
+_lr_signature = '39788C22D885963C3CC3E72A43E830E3'
     
-_lr_action_items = {'=':([10,],[24,]),'YIN':([0,2,4,6,7,11,16,21,23,25,26,35,36,42,44,45,46,],[1,1,-1,1,-5,-8,-2,-6,-7,1,1,1,1,-4,1,1,-9,]),'}':([7,11,21,23,35,36,45,46,],[-5,-8,-6,-7,40,41,46,-9,]),'SEAL':([40,],[42,]),'MULT':([3,5,10,14,15,22,30,31,32,33,34,37,38,39,],[-20,17,-21,-21,17,-19,-17,17,-18,17,17,17,17,17,]),'>':([3,14,15,22,30,31,32,33,],[-20,-21,28,-19,-17,-16,-18,-15,]),'MINUS':([0,1,2,3,4,5,6,7,8,10,11,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,42,44,45,46,],[8,8,8,-20,-1,18,8,-5,8,-21,-8,-21,18,-2,8,8,8,8,-6,-19,-7,8,8,8,8,8,8,-17,-16,-18,-15,18,8,8,18,18,18,-4,8,8,-9,]),'NUMBER':([0,1,2,4,6,7,8,11,16,17,18,19,20,21,23,24,25,26,27,28,29,35,36,42,44,45,46,],[3,3,3,-1,3,-5,3,-8,-2,3,3,3,3,-6,-7,3,3,3,3,3,3,3,3,-4,3,3,-9,]),'EQ':([3,14,15,22,30,31,32,33,],[-20,-21,29,-19,-17,-16,-18,-15,]),'ID':([0,1,2,4,6,7,8,11,16,17,18,19,20,21,23,24,25,26,27,28,29,35,36,42,44,45,46,],[10,14,10,-1,10,-5,14,-8,-2,14,14,14,14,-6,-7,14,10,10,14,14,14,10,10,-4,10,10,-9,]),'PLUS':([3,5,10,14,15,22,30,31,32,33,34,37,38,39,],[-20,20,-21,-21,20,-19,-17,-16,-18,-15,20,20,20,20,]),';':([3,5,9,10,14,22,30,31,32,33,34,],[-20,-14,23,-21,-21,-19,-17,-16,-18,-15,-13,]),'$end':([2,4,6,7,11,16,21,23,42,46,],[0,-1,-3,-5,-8,-2,-6,-7,-4,-9,]),'<':([3,14,15,22,30,31,32,33,],[-20,-21,27,-19,-17,-16,-18,-15,]),'YANG':([41,],[43,]),'{':([3,12,13,14,22,30,31,32,33,37,38,39,43,],[-20,25,26,-21,-19,-17,-16,-18,-15,-11,-10,-12,44,]),'JUTSU':([0,2,4,6,7,11,16,21,23,42,46,],[12,12,-1,-3,-5,-8,-2,-6,-7,-4,-9,]),'DIV':([3,5,10,14,15,22,30,31,32,33,34,37,38,39,],[-20,19,-21,-21,19,-19,-17,19,-18,19,19,19,19,19,]),}
+_lr_action_items = {'EQ':([5,16,17,24,32,33,34,35,],[-20,-21,29,-19,-18,-16,-17,-15,]),'JUTSU':([0,4,8,9,11,12,22,23,25,41,46,],[1,-5,-8,-3,1,-1,-7,-6,-2,-4,-9,]),'ID':([0,3,4,8,9,10,11,12,13,14,18,19,20,21,22,23,25,26,28,29,30,31,37,41,44,45,46,],[2,16,-5,-8,2,16,2,-1,2,16,16,16,16,16,-7,-6,-2,2,2,16,16,16,2,-4,2,2,-9,]),'YIN':([0,4,8,9,11,12,13,22,23,25,26,28,37,41,44,45,46,],[3,-5,-8,3,3,-1,3,-7,-6,-2,3,3,3,-4,3,3,-9,]),'=':([2,],[14,]),';':([2,5,6,7,16,24,27,32,33,34,35,],[-21,-20,-14,22,-21,-19,-13,-18,-16,-17,-15,]),'<':([5,16,17,24,32,33,34,35,],[-20,-21,31,-19,-18,-16,-17,-15,]),'DIV':([2,5,6,16,17,24,27,32,33,34,35,38,39,40,],[-21,-20,18,-21,18,-19,18,-18,18,-17,18,18,18,18,]),'NUMBER':([0,3,4,8,9,10,11,12,13,14,18,19,20,21,22,23,25,26,28,29,30,31,37,41,44,45,46,],[5,5,-5,-8,5,5,5,-1,5,5,5,5,5,5,-7,-6,-2,5,5,5,5,5,5,-4,5,5,-9,]),'MINUS':([0,2,3,4,5,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,44,45,46,],[10,-21,10,-5,-20,19,-8,10,10,10,-1,10,10,-21,19,10,10,10,10,-7,-6,-19,-2,10,19,10,10,10,10,-18,-16,-17,-15,10,19,19,19,-4,10,10,-9,]),'>':([5,16,17,24,32,33,34,35,],[-20,-21,30,-19,-18,-16,-17,-15,]),'MULT':([2,5,6,16,17,24,27,32,33,34,35,38,39,40,],[-21,-20,20,-21,20,-19,20,-18,20,-17,20,20,20,20,]),'SEAL':([36,],[41,]),'$end':([4,8,9,11,12,22,23,25,41,46,],[-5,-8,-3,0,-1,-7,-6,-2,-4,-9,]),'}':([4,8,22,23,26,37,45,46,],[-5,-8,-7,-6,36,42,46,-9,]),'YANG':([42,],[43,]),'{':([1,5,15,16,24,32,33,34,35,38,39,40,43,],[13,-20,28,-21,-19,-18,-16,-17,-15,-12,-10,-11,44,]),'PLUS':([2,5,6,16,17,24,27,32,33,34,35,38,39,40,],[-21,-20,21,-21,21,-19,21,-18,-16,-17,-15,21,21,21,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'chakra':([0,2,],[4,16,]),'yinyang':([0,2,6,25,26,35,36,44,45,],[11,11,11,11,11,11,11,11,11,]),'predicate':([1,],[13,]),'combo_move':([0,2,25,26,44,],[6,6,35,36,45,]),'hand_sign':([0,2,6,25,26,35,36,44,45,],[9,9,9,9,9,9,9,9,9,]),'move':([0,2,6,25,26,35,36,44,45,],[7,7,21,7,7,21,21,7,21,]),'showdown':([0,],[2,]),'expression':([0,1,2,6,8,17,18,19,20,24,25,26,27,28,29,35,36,44,45,],[5,15,5,5,22,30,31,32,33,34,5,5,37,38,39,5,5,5,5,]),}
+_lr_goto_items = {'predicate':([3,],[15,]),'showdown':([0,],[11,]),'chakra':([0,11,],[12,25,]),'move':([0,9,11,13,26,28,37,44,45,],[4,23,4,4,23,4,23,4,23,]),'hand_sign':([0,9,11,13,26,28,37,44,45,],[7,7,7,7,7,7,7,7,7,]),'yinyang':([0,9,11,13,26,28,37,44,45,],[8,8,8,8,8,8,8,8,8,]),'expression':([0,3,9,10,11,13,14,18,19,20,21,26,28,29,30,31,37,44,45,],[6,17,6,24,6,6,27,32,33,34,35,6,6,38,39,40,6,6,6,]),'combo_move':([0,11,13,28,44,],[9,9,26,37,45,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,25 +26,25 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> showdown","S'",1,None,None,None),
-  ('showdown -> chakra','showdown',1,'p_ninja_showdown','parser.py',24),
-  ('showdown -> showdown chakra','showdown',2,'p_ninja_showdown','parser.py',25),
-  ('chakra -> combo_move','chakra',1,'p_chakra','parser.py',34),
-  ('chakra -> JUTSU { combo_move } SEAL','chakra',5,'p_chakra','parser.py',35),
-  ('combo_move -> move','combo_move',1,'p_combo_move','parser.py',45),
-  ('combo_move -> combo_move move','combo_move',2,'p_combo_move','parser.py',46),
-  ('move -> hand_sign ;','move',2,'p_move','parser.py',55),
-  ('move -> yinyang','move',1,'p_move','parser.py',56),
-  ('yinyang -> YIN predicate { combo_move } YANG { combo_move }','yinyang',9,'p_yinyang','parser.py',62),
-  ('predicate -> expression > expression','predicate',3,'p_predicate','parser.py',69),
-  ('predicate -> expression < expression','predicate',3,'p_predicate','parser.py',70),
-  ('predicate -> expression EQ expression','predicate',3,'p_predicate','parser.py',71),
-  ('hand_sign -> ID = expression','hand_sign',3,'p_hand_sign','parser.py',82),
-  ('hand_sign -> expression','hand_sign',1,'p_hand_sign','parser.py',83),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','parser.py',94),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','parser.py',95),
-  ('expression -> expression MULT expression','expression',3,'p_expression_binop','parser.py',96),
-  ('expression -> expression DIV expression','expression',3,'p_expression_binop','parser.py',97),
-  ('expression -> MINUS expression','expression',2,'p_expression_UMINUS','parser.py',110),
-  ('expression -> NUMBER','expression',1,'p_expression_variable','parser.py',115),
-  ('expression -> ID','expression',1,'p_expression_ID','parser.py',121),
+  ('showdown -> chakra','showdown',1,'p_ninja_showdown','parser.py',28),
+  ('showdown -> showdown chakra','showdown',2,'p_ninja_showdown','parser.py',29),
+  ('chakra -> combo_move','chakra',1,'p_chakra','parser.py',38),
+  ('chakra -> JUTSU { combo_move } SEAL','chakra',5,'p_chakra','parser.py',39),
+  ('combo_move -> move','combo_move',1,'p_combo_move','parser.py',49),
+  ('combo_move -> combo_move move','combo_move',2,'p_combo_move','parser.py',50),
+  ('move -> hand_sign ;','move',2,'p_move','parser.py',59),
+  ('move -> yinyang','move',1,'p_move','parser.py',60),
+  ('yinyang -> YIN predicate { combo_move } YANG { combo_move }','yinyang',9,'p_yinyang','parser.py',66),
+  ('predicate -> expression > expression','predicate',3,'p_predicate','parser.py',73),
+  ('predicate -> expression < expression','predicate',3,'p_predicate','parser.py',74),
+  ('predicate -> expression EQ expression','predicate',3,'p_predicate','parser.py',75),
+  ('hand_sign -> ID = expression','hand_sign',3,'p_hand_sign','parser.py',86),
+  ('hand_sign -> expression','hand_sign',1,'p_hand_sign','parser.py',87),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','parser.py',98),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','parser.py',99),
+  ('expression -> expression MULT expression','expression',3,'p_expression_binop','parser.py',100),
+  ('expression -> expression DIV expression','expression',3,'p_expression_binop','parser.py',101),
+  ('expression -> MINUS expression','expression',2,'p_expression_UMINUS','parser.py',113),
+  ('expression -> NUMBER','expression',1,'p_expression_variable','parser.py',118),
+  ('expression -> ID','expression',1,'p_expression_ID','parser.py',124),
 ]

@@ -1,6 +1,7 @@
 import ply.yacc as yacc
 from lexer import NinLexer
 import sys
+import os
 import logging
 
 
@@ -13,7 +14,10 @@ class NinParser():
     identifiers = {}
 
     def __init__(self, Lexer, log=True):
-        self.tokens = Lexer.tokens
+        self.Lexer = Lexer
+        self.Lexer.build()
+        self.tokens = self.Lexer.tokens
+        self.lexer = self.Lexer.lexer
         logging.basicConfig(level=logging.DEBUG)
         self.logger = logging.getLogger(__name__)
         if not log:
@@ -84,10 +88,10 @@ class NinParser():
         """
         if len(p) == 4:
             self.identifiers[p[1]] = p[3]
-            self.logger.debug(self.identifiers[p[1]])
             p[0] = p[1]
         else:
             p[0] = p[1]
+        self.logger.debug("hand_sign: {}".format(p[0]))
 
     def p_expression_binop(self, p):
         """
@@ -104,7 +108,6 @@ class NinParser():
             p[0] = p[1] * p[3]
         elif p[2] == '/':
             p[0] = p[1] / p[3]
-        self.logger.debug(p[0])
 
     def p_expression_UMINUS(self, p):
         'expression : MINUS expression %prec UMINUS'
@@ -130,20 +133,29 @@ class NinParser():
     def build(self, **kwargs):
         yacc.yacc(module=self)
 
-    def run(self):
-        while 1:
-            try:
-                s = input('ninshu > ')
-            except (EOFError, KeyboardInterrupt):
-                break
-            yacc.parse(s)
+    def run(self, data=None):
+        if data:
+            yacc.parse(data)
+        else:
+            while 1:
+                try:
+                    s = input('ninshu > ')
+                except (EOFError, KeyboardInterrupt):
+                    break
+                yacc.parse(s)
         print(self.identifiers)
 
 
 if __name__ == '__main__':
     Lexer = NinLexer()
-    Lexer.build()
-    lexer = Lexer.lexer
     parser = NinParser(Lexer)
     parser.build()
-    parser.run()
+    print(sys.argv)
+    parent_dir = os.path.abspath(os.path.join(sys.argv[0], os.pardir))
+    if len(sys.argv) > 1:
+        input_file = os.path.join(parent_dir, sys.argv[1])
+        with open(input_file, 'r') as f:
+            input_string = f.read().replace('\n', '')
+        parser.run(input_string)
+    else:
+        parser.run()
