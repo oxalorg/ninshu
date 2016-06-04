@@ -3,6 +3,7 @@ from lexer import NinLexer
 import sys
 import os
 import logging
+from njast import *
 
 
 class NinParser():
