@@ -30,9 +30,10 @@ class NinParser():
                     | showdown chakra
         """
         if len(p) == 2:
-            p[0] = p[1]
+            p[0] = Showdown([p[1]])
         else:
-            p[0] = [p[1], p[2]]
+            p[1].append(p[2])
+            p[0] = p[1]
 
     def p_chakra(self, p):
         """
@@ -42,7 +43,7 @@ class NinParser():
         if len(p) == 2:
             p[0] = p[1]
         else:
-            p[0] = p[3]
+            p[0] = JutsuSeal(p[3])
         self.logger.debug("chakra: {}".format(p[0]))
 
     def p_combo_move(self, p):
@@ -51,9 +52,15 @@ class NinParser():
                     | combo_move move
         """
         if len(p) == 2:
-            p[0] = p[1]
+            p[0] = Combo([p[1]])
         else:
-            p[0] = [p[1], p[2]]
+            p[1].append(p[2])
+            p[0] = p[1]
+        # combo = Combo()
+        # for move in moves:
+        #     combo.children.append(move)
+        # p[0] = combo
+        # p[0] = Combo(moves)
 
     def p_move(self, p):
         """
@@ -66,7 +73,7 @@ class NinParser():
         """
         yinyang : YIN predicate '{' combo_move '}' YANG '{' combo_move '}'
         """
-        p[0] = p[4] if p[2] else p[8]
+        p[0] = YinYang(p[2], p[4], p[8])
         self.logger.debug("YinYang: {}".format(p[0]))
 
     def p_predicate(self, p):
@@ -75,12 +82,7 @@ class NinParser():
                     | expression '<' expression
                     | expression EQ expression
         """
-        if p[2] == '>':
-            p[0] = True if p[1] > p[3] else False
-        elif p[2] == '<':
-            p[0] = True if p[1] < p[3] else False
-        else:
-            p[0] = True if p[1] == p[3] else False
+        p[0] = BinOp(p[1], p[2], p[3])
 
     def p_hand_sign(self, p):
         """
@@ -88,8 +90,7 @@ class NinParser():
                     | expression
         """
         if len(p) == 4:
-            self.identifiers[p[1]] = p[3]
-            p[0] = p[1]
+            p[0] = HandSign(p[1], p[3])
         else:
             p[0] = p[1]
         self.logger.debug("hand_sign: {}".format(p[0]))
@@ -101,35 +102,25 @@ class NinParser():
                    | expression MULT expression
                    | expression DIV expression
         """
-        if p[2] == '+':
-            p[0] = p[1] + p[3]
-        elif p[2] == '-':
-            p[0] = p[1] - p[3]
-        elif p[2] == '*':
-            p[0] = p[1] * p[3]
-        elif p[2] == '/':
-            p[0] = p[1] / p[3]
+        p[0] = BinOp(p[1], p[2], p[3])
 
     def p_expression_UMINUS(self, p):
-        'expression : MINUS expression %prec UMINUS'
-        p[0] = -p[2]
+        """
+        expression : MINUS expression %prec UMINUS
+        """
+        p[0] = UnOp(p[1], p[2])
 
     def p_expression_variable(self, p):
         """
         expression  : NUMBER
         """
-        p[0] = p[1]
+        p[0] = Number(p[1])
 
     def p_expression_ID(self, p):
         """
         expression  : ID
         """
-        try:
-            p[0] = self.identifiers[p[1]]
-        except LookupError:
-            # If a variable isn't defined yet, silently make it 42
-            p[0] = 42
-            # cuz why not?
+        p[0] = Variable(p[1])
 
     def build(self, **kwargs):
         yacc.yacc(module=self)
