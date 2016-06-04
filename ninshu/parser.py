@@ -35,7 +35,8 @@ class NinParser():
         else:
             p[1].append(p[2])
             p[0] = p[1]
-        Visitor(p[0])
+        tree = VisitorDispatch(p[0])
+        print(tree.GLOBALS)
 
     def p_chakra(self, p):
         """

@@ -1,8 +1,9 @@
-DEBUG:__main__:hand_sign: a
-DEBUG:__main__:hand_sign: -1
-DEBUG:__main__:hand_sign: -99
-DEBUG:__main__:YinYang: -99
-DEBUG:__main__:hand_sign: 99
-DEBUG:__main__:YinYang: -99
-DEBUG:__main__:chakra: ['a', -99]
+DEBUG:__main__:hand_sign: <njast.HandSign object at 0x7f1af15f26a0>
+DEBUG:__main__:hand_sign: <njast.UnOp object at 0x7f1af1580208>
+DEBUG:__main__:hand_sign: <njast.UnOp object at 0x7f1af1580518>
+DEBUG:__main__:YinYang: <njast.YinYang object at 0x7f1af1580550>
+DEBUG:__main__:hand_sign: <njast.Number object at 0x7f1af1580198>
+DEBUG:__main__:YinYang: <njast.YinYang object at 0x7f1af15804e0>
+DEBUG:__main__:chakra: <njast.JutsuSeal object at 0x7f1af15f27b8>
 {'a': 2}
+{}
